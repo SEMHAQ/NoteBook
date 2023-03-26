@@ -1,0 +1,3116 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../SQL%20%E9%80%9A%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+      
+      
+        <link rel="next" href="../../SQL%E5%87%BD%E6%95%B0/SQL%20%E5%87%BD%E6%95%B0/">
+      
+      <link rel="icon" href="../../../images/logo.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.2">
+    
+    
+      
+        <title>SQL 用于各种数据库的数据类型 - SEMHAQ/Notebook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7bf56d0a.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.a0c5b2b5.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent="">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="SEMHAQ/Notebook" class="md-header__button md-logo" aria-label="SEMHAQ/Notebook" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SEMHAQ/Notebook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SQL 用于各种数据库的数据类型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="white" data-md-color-accent=""  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SEMHAQ/NoteBook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SEMHAQ / NoteBook
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        主页
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1605.%20%E7%BB%99%E5%AE%9A%E8%A1%8C%E5%92%8C%E5%88%97%E7%9A%84%E5%92%8C%E6%B1%82%E5%8F%AF%E8%A1%8C%E7%9F%A9%E9%98%B5/" class="md-tabs__link">
+        LeetCode
+      </a>
+    </li>
+  
+
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/introduction/" class="md-tabs__link">
+        机器学习
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E6%A0%87%E9%A2%98/" class="md-tabs__link">
+        MarkDown语法
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Git%E8%AF%A6%E8%A7%A3/%E4%B8%8A%E4%BC%A0%E5%88%B0%E4%BB%93%E5%BA%93/" class="md-tabs__link">
+        Git详解
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%E7%AE%80%E4%BB%8B/" class="md-tabs__link md-tabs__link--active">
+        数据库相关
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../about/" class="md-tabs__link">
+        关于
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="SEMHAQ/Notebook" class="md-nav__button md-logo" aria-label="SEMHAQ/Notebook" data-md-component="logo">
+      
+  <img src="../../../images/logo.png" alt="logo">
+
+    </a>
+    SEMHAQ/Notebook
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SEMHAQ/NoteBook" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    SEMHAQ / NoteBook
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+      
+      
+        
+          
+            
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="../../..">主页</a>
+          
+        </div>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          主页
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          LeetCode
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          LeetCode
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          每日一题
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          每日一题
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+          2023年3月
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_1_1">
+          <span class="md-nav__icon md-icon"></span>
+          2023年3月
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1605.%20%E7%BB%99%E5%AE%9A%E8%A1%8C%E5%92%8C%E5%88%97%E7%9A%84%E5%92%8C%E6%B1%82%E5%8F%AF%E8%A1%8C%E7%9F%A9%E9%98%B5/" class="md-nav__link">
+        2023年3月14号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1615.%20%E6%9C%80%E5%A4%A7%E7%BD%91%E7%BB%9C%E7%A7%A9/" class="md-nav__link">
+        2023年3月15号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/2488.%20%E7%BB%9F%E8%AE%A1%E4%B8%AD%E4%BD%8D%E6%95%B0%E4%B8%BA%20K%20%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" class="md-nav__link">
+        2023年3月16号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/2389.%20%E5%92%8C%E6%9C%89%E9%99%90%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E5%BA%8F%E5%88%97/" class="md-nav__link">
+        2023年3月17号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1616.%20%E5%88%86%E5%89%B2%E4%B8%A4%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BE%97%E5%88%B0%E5%9B%9E%E6%96%87%E4%B8%B2/" class="md-nav__link">
+        2023年3月18号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1625.%20%E6%89%A7%E8%A1%8C%E6%93%8D%E4%BD%9C%E5%90%8E%E5%AD%97%E5%85%B8%E5%BA%8F%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="md-nav__link">
+        2023年3月19号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1012.%20%E8%87%B3%E5%B0%91%E6%9C%89%201%20%E4%BD%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97/" class="md-nav__link">
+        2023年3月20号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/2469.%20%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2/" class="md-nav__link">
+        2023年3月21号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1626.%20%E6%97%A0%E7%9F%9B%E7%9B%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E7%90%83%E9%98%9F/" class="md-nav__link">
+        2023年3月22号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1630.%20%E7%AD%89%E5%B7%AE%E5%AD%90%E6%95%B0%E7%BB%84/" class="md-nav__link">
+        2023年3月23号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1032.%20%E5%AD%97%E7%AC%A6%E6%B5%81/" class="md-nav__link">
+        2023年3月24号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/1574.%20%E5%88%A0%E9%99%A4%E6%9C%80%E7%9F%AD%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84%E4%BD%BF%E5%89%A9%E4%BD%99%E6%95%B0%E7%BB%84%E6%9C%89%E5%BA%8F/" class="md-nav__link">
+        2023年3月25号
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/2023%E5%B9%B43%E6%9C%88/2395.%20%E5%92%8C%E7%9B%B8%E7%AD%89%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" class="md-nav__link">
+        2023年3月25号
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+      
+      
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+          学习计划
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          学习计划
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_1" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_1" id="__nav_2_2_1_label" tabindex="0">
+          算法入门
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_1">
+          <span class="md-nav__icon md-icon"></span>
+          算法入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/%E7%AC%AC%E4%B8%80%E5%A4%A9/" class="md-nav__link">
+        第一天
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2_2" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_2_2_2" id="__nav_2_2_2_label" tabindex="0">
+          算法基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_2_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          算法基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%B8%80%E5%A4%A9/" class="md-nav__link">
+        第一天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%BA%8C%E5%A4%A9/" class="md-nav__link">
+        第二天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%B8%89%E5%A4%A9/" class="md-nav__link">
+        第三天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%9B%9B%E5%A4%A9/" class="md-nav__link">
+        第四天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%BA%94%E5%A4%A9/" class="md-nav__link">
+        第五天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%85%AD%E5%A4%A9/" class="md-nav__link">
+        第六天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%B8%83%E5%A4%A9/" class="md-nav__link">
+        第七天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%85%AB%E5%A4%A9/" class="md-nav__link">
+        第八天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%B9%9D%E5%A4%A9/" class="md-nav__link">
+        第九天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E5%A4%A9/" class="md-nav__link">
+        第十天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9/" class="md-nav__link">
+        第十一天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9/" class="md-nav__link">
+        第十二天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9/" class="md-nav__link">
+        第十三天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9/" class="md-nav__link">
+        第十四天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9/" class="md-nav__link">
+        第十五天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E5%85%AD%E5%A4%A9/" class="md-nav__link">
+        第十六天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%A4%A9/" class="md-nav__link">
+        第十七天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%A4%A9/" class="md-nav__link">
+        第十八天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%A4%A9/" class="md-nav__link">
+        第十九天
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../leetcode/%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%A4%A9/" class="md-nav__link">
+        第二十天
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          机器学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+          Python机器学习简单应用
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3_1">
+          <span class="md-nav__icon md-icon"></span>
+          Python机器学习简单应用
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/introduction/" class="md-nav__link">
+        介绍
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/dataset/" class="md-nav__link">
+        数据集说明
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/predict/" class="md-nav__link">
+        预测算法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/Python%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8/sorting/" class="md-nav__link">
+        分类算法
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          MarkDown语法
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          MarkDown语法
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E6%A0%87%E9%A2%98/" class="md-nav__link">
+        Markdown标题
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E6%AE%B5%E8%90%BD%E6%A0%BC%E5%BC%8F/" class="md-nav__link">
+        Markdown段落格式
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E5%88%97%E8%A1%A8/" class="md-nav__link">
+        Markdown列表
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E5%8C%BA%E5%9D%97/" class="md-nav__link">
+        Markdown区块
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E4%BB%A3%E7%A0%81/" class="md-nav__link">
+        Markdown代码
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E9%93%BE%E6%8E%A5/" class="md-nav__link">
+        Markdown链接
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E5%9B%BE%E7%89%87/" class="md-nav__link">
+        Markdown图片
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E8%A1%A8%E6%A0%BC/" class="md-nav__link">
+        Markdown表格
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../MarkDown%E8%AF%AD%E6%B3%95/Markdown%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7/" class="md-nav__link">
+        Markdown高级技巧
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          Git详解
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Git详解
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Git%E8%AF%A6%E8%A7%A3/%E4%B8%8A%E4%BC%A0%E5%88%B0%E4%BB%93%E5%BA%93/" class="md-nav__link">
+        上传到仓库
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          数据库相关
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          数据库相关
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_1" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+          SQL教程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          SQL教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%E7%AE%80%E4%BB%8B/" class="md-nav__link">
+        SQL 简介
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%E8%AF%AD%E6%B3%95/" class="md-nav__link">
+        SQL 语法
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20SELECT/" class="md-nav__link">
+        SQL SELECT 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20SELECT%20DISTINCT/" class="md-nav__link">
+        SQL SELECT DISTINCT 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20WHERE/" class="md-nav__link">
+        SQL WHERE 子句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20AND%20%26%20OR/" class="md-nav__link">
+        SQL AND & OR 运算符
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20ORDER%20BY/" class="md-nav__link">
+        SQL ORDER BY 关键字
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20INSERT%20INTO/" class="md-nav__link">
+        SQL INSERT INTO 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20UPDATE/" class="md-nav__link">
+        SQL UPDATE 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E6%95%99%E7%A8%8B/SQL%20DELETE/" class="md-nav__link">
+        SQL DELETE 语句
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+          SQL高级教程
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          SQL高级教程
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20SELECT%20TOP/" class="md-nav__link">
+        SQL SELECT TOP, LIMIT, ROWNUM 子句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20LIKE/" class="md-nav__link">
+        SQL LIKE 操作符
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E9%80%9A%E9%85%8D%E7%AC%A6/" class="md-nav__link">
+        SQL 通配符
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20IN%20%E6%93%8D%E4%BD%9C%E7%AC%A6/" class="md-nav__link">
+        SQL IN 操作符
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20BETWEEN%20%E6%93%8D%E4%BD%9C%E7%AC%A6/" class="md-nav__link">
+        SQL BETWEEN 操作符
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E5%88%AB%E5%90%8D/" class="md-nav__link">
+        SQL 别名
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E8%BF%9E%E6%8E%A5%28JOIN%29/" class="md-nav__link">
+        SQL 连接(JOIN)
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20INNER%20JOIN%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="md-nav__link">
+        SQL INNER JOIN 关键字
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20LEFT%20JOIN%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="md-nav__link">
+        SQL LEFT JOIN 关键字
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20RIGHT%20JOIN%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="md-nav__link">
+        SQL RIGHT JOIN 关键字
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20FULL%20OUTER%20JOIN%20%E5%85%B3%E9%94%AE%E5%AD%97/" class="md-nav__link">
+        SQL FULL OUTER JOIN 关键字
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20UNION%20%E6%93%8D%E4%BD%9C%E7%AC%A6/" class="md-nav__link">
+        SQL UNION 操作符
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20SELECT%20INTO%20%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        SQL SELECT INTO 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20INSERT%20INTO%20SELECT%20%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        SQL INSERT INTO SELECT 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20CREATE%20DATABASE%20%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        SQL CREATE DATABASE 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20CREATE%20TABLE%20%E8%AF%AD%E5%8F%A5/" class="md-nav__link">
+        SQL CREATE TABLE 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E7%BA%A6%E6%9D%9F/" class="md-nav__link">
+        SQL 约束（Constraints）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20NOT%20NULL/" class="md-nav__link">
+        SQL NOT NULL 约束
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20UNIQUE/" class="md-nav__link">
+        SQL UNIQUE 约束
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20PRIMARY%20KEY/" class="md-nav__link">
+        SQL PRIMARY KEY 约束
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20FOREIGN%20KEY/" class="md-nav__link">
+        SQL FOREIGN KEY 约束
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20CHECK/" class="md-nav__link">
+        SQL CHECK 约束
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20DEFAULT/" class="md-nav__link">
+        SQL DEFAULT 约束
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20CREATE%20INDEX/" class="md-nav__link">
+        SQL CREATE INDEX 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20DROP/" class="md-nav__link">
+        SQL 撤销索引、撤销表以及撤销数据库
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20ALTER%20TABLE/" class="md-nav__link">
+        SQL ALTER TABLE 语句
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20AUTO%20INCREMENT/" class="md-nav__link">
+        SQL AUTO INCREMENT 字段
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E8%A7%86%E5%9B%BE/" class="md-nav__link">
+        SQL 视图（Views）
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E6%97%A5%E6%9C%9F/" class="md-nav__link">
+        SQL Date 函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20NULL%20%E5%80%BC/" class="md-nav__link">
+        SQL NULL 值
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20NULL%20%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        SQL NULL 函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SQL%20%E9%80%9A%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        SQL 通用数据类型
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          SQL 用于各种数据库的数据类型
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        SQL 用于各种数据库的数据类型
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#microsoft-access" class="md-nav__link">
+    Microsoft Access 数据类型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    MySQL 数据类型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server" class="md-nav__link">
+    SQL Server 数据类型
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+          SQL函数
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          SQL函数
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E5%87%BD%E6%95%B0/SQL%20%E5%87%BD%E6%95%B0/" class="md-nav__link">
+        SQL 函数
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E5%87%BD%E6%95%B0/SQL%E5%BF%AB%E9%80%9F%E5%8F%82%E8%80%83/" class="md-nav__link">
+        SQL 快速参考
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E5%87%BD%E6%95%B0/SQL%20%E5%87%BD%E6%95%B0%E5%A4%A7%E5%85%A8/" class="md-nav__link">
+        SQL 函数大全
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E5%87%BD%E6%95%B0/SQL%20%E4%B8%BB%E6%9C%BA/" class="md-nav__link">
+        SQL 主机
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../SQL%E5%87%BD%E6%95%B0/SQL%20%E6%80%BB%E7%BB%93/" class="md-nav__link">
+        SQL 总结
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          关于
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          关于
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        关于
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="sql">SQL 用于各种数据库的数据类型</h1>
+<p>Microsoft Access、MySQL 和 SQL Server 所使用的数据类型和范围。</p>
+<hr />
+<h2 id="microsoft-access">Microsoft Access 数据类型</h2>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>存储</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text</td>
+<td>用于文本或文本与数字的组合。最多 255 个字符。</td>
+<td></td>
+</tr>
+<tr>
+<td>Memo</td>
+<td>Memo 用于更大数量的文本。最多存储 65,536 个字符。<strong>注释：</strong>无法对 memo 字段进行排序。不过它们是可搜索的。</td>
+<td></td>
+</tr>
+<tr>
+<td>Byte</td>
+<td>允许 0 到 255 的数字。</td>
+<td>1 字节</td>
+</tr>
+<tr>
+<td>Integer</td>
+<td>允许介于 -32,768 与 32,767 之间的全部数字。</td>
+<td>2 字节</td>
+</tr>
+<tr>
+<td>Long</td>
+<td>允许介于 -2,147,483,648 与 2,147,483,647 之间的全部数字。</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td>Single</td>
+<td>单精度浮点。处理大多数小数。</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td>Double</td>
+<td>双精度浮点。处理大多数小数。</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>用于货币。支持 15 位的元，外加 4 位小数。<strong>提示：</strong>您可以选择使用哪个国家的货币。</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td>AutoNumber</td>
+<td>AutoNumber 字段自动为每条记录分配数字，通常从 1 开始。</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td>Date/Time</td>
+<td>用于日期和时间</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td>Yes/No</td>
+<td>逻辑字段，可以显示为 Yes/No、True/False 或 On/Off。在代码中，使用常量 True 和 False （等价于 1 和 0）。<strong>注释：</strong>Yes/No 字段中不允许 Null 值</td>
+<td>1 比特</td>
+</tr>
+<tr>
+<td>Ole Object</td>
+<td>可以存储图片、音频、视频或其他 BLOBs（Binary Large OBjects）。</td>
+<td>最多 1GB</td>
+</tr>
+<tr>
+<td>Hyperlink</td>
+<td>包含指向其他文件的链接，包括网页。</td>
+<td></td>
+</tr>
+<tr>
+<td>Lookup Wizard</td>
+<td>允许您创建一个可从下拉列表中进行选择的选项列表。</td>
+<td>4 字节</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mysql">MySQL 数据类型</h2>
+<p>在 MySQL 中，有三种主要的类型：Text（文本）、Number（数字）和 Date/Time（日期/时间）类型。</p>
+<p><strong>Text 类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CHAR(size)</td>
+<td>保存固定长度的字符串（可包含字母、数字以及特殊字符）。在括号中指定字符串的长度。最多 255 个字符。</td>
+</tr>
+<tr>
+<td>VARCHAR(size)</td>
+<td>保存可变长度的字符串（可包含字母、数字以及特殊字符）。在括号中指定字符串的最大长度。最多 255 个字符。<strong>注释：</strong>如果值的长度大于 255，则被转换为 TEXT 类型。</td>
+</tr>
+<tr>
+<td>TINYTEXT</td>
+<td>存放最大长度为 255 个字符的字符串。</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>存放最大长度为 65,535 个字符的字符串。</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>用于 BLOBs（Binary Large OBjects）。存放最多 65,535 字节的数据。</td>
+</tr>
+<tr>
+<td>MEDIUMTEXT</td>
+<td>存放最大长度为 16,777,215 个字符的字符串。</td>
+</tr>
+<tr>
+<td>MEDIUMBLOB</td>
+<td>用于 BLOBs（Binary Large OBjects）。存放最多 16,777,215 字节的数据。</td>
+</tr>
+<tr>
+<td>LONGTEXT</td>
+<td>存放最大长度为 4,294,967,295 个字符的字符串。</td>
+</tr>
+<tr>
+<td>LONGBLOB</td>
+<td>用于 BLOBs (Binary Large OBjects)。存放最多 4,294,967,295 字节的数据。</td>
+</tr>
+<tr>
+<td>ENUM(x,y,z,etc.)</td>
+<td>允许您输入可能值的列表。可以在 ENUM 列表中列出最大 65535 个值。如果列表中不存在插入的值，则插入空值。<br><br><strong>注释：</strong>这些值是按照您输入的顺序排序的。<br><br>可以按照此格式输入可能的值： ENUM('X','Y','Z')</td>
+</tr>
+<tr>
+<td>SET</td>
+<td>与 ENUM 类似，不同的是，SET 最多只能包含 64 个列表项且 SET 可存储一个以上的选择。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Number 类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TINYINT(size)</td>
+<td>带符号-128到127 ，无符号0到255。</td>
+</tr>
+<tr>
+<td>SMALLINT(size)</td>
+<td>带符号范围-32768到32767，无符号0到65535, size 默认为 6。</td>
+</tr>
+<tr>
+<td>MEDIUMINT(size)</td>
+<td>带符号范围-8388608到8388607，无符号的范围是0到16777215。 size 默认为9</td>
+</tr>
+<tr>
+<td>INT(size)</td>
+<td>带符号范围-2147483648到2147483647，无符号的范围是0到4294967295。 size 默认为 11</td>
+</tr>
+<tr>
+<td>BIGINT(size)</td>
+<td>带符号的范围是-9223372036854775808到9223372036854775807，无符号的范围是0到18446744073709551615。size 默认为 20</td>
+</tr>
+<tr>
+<td>FLOAT(size,d)</td>
+<td>带有浮动小数点的小数字。在 size 参数中规定显示最大位数。在 d 参数中规定小数点右侧的最大位数。</td>
+</tr>
+<tr>
+<td>DOUBLE(size,d)</td>
+<td>带有浮动小数点的大数字。在 size 参数中规显示定最大位数。在 d 参数中规定小数点右侧的最大位数。</td>
+</tr>
+<tr>
+<td>DECIMAL(size,d)</td>
+<td>作为字符串存储的 DOUBLE 类型，允许固定的小数点。在 size 参数中规定显示最大位数。在 d 参数中规定小数点右侧的最大位数。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>注意：</strong>以上的 size 代表的并不是存储在数据库中的具体的长度，如 int(4) 并不是只能存储4个长度的数字。</p>
+<p>实际上int(size)所占多少存储空间并无任何关系。int(3)、int(4)、int(8) 在磁盘上都是占用 4 btyes 的存储空间。就是在显示给用户的方式有点不同外，int(M) 跟 int 数据类型是相同的。</p>
+<p>例如：</p>
+<p>1、int的值为10 （指定zerofill）</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>int（9）显示结果为000000010  int（3）显示结果为010
+</code></pre></div>
+<p>就是显示的长度不一样而已 都是占用四个字节的空间</p>
+</blockquote>
+<p><strong>Date 类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATE()</td>
+<td>日期。格式：YYYY-MM-DD<br><br><strong>注释：</strong>支持的范围是从 '1000-01-01' 到 '9999-12-31'</td>
+</tr>
+<tr>
+<td>DATETIME()</td>
+<td><em>日期和时间的组合。格式：YYYY-MM-DD HH:MM:SS<br><br></em><em>注释：</em>*支持的范围是从 '1000-01-01 00:00:00' 到 '9999-12-31 23:59:59'</td>
+</tr>
+<tr>
+<td>TIMESTAMP()</td>
+<td><em>时间戳。TIMESTAMP 值使用 Unix 纪元('1970-01-01 00:00:00' UTC) 至今的秒数来存储。格式：YYYY-MM-DD HH:MM:SS<br><br></em><em>注释：</em>*支持的范围是从 '1970-01-01 00:00:01' UTC 到 '2038-01-09 03:14:07' UTC</td>
+</tr>
+<tr>
+<td>TIME()</td>
+<td>时间。格式：HH:MM:SS<br><br><strong>注释：</strong>支持的范围是从 '-838:59:59' 到 '838:59:59'</td>
+</tr>
+<tr>
+<td>YEAR()</td>
+<td>2 位或 4 位格式的年。<br><br><strong>注释：</strong>4 位格式所允许的值：1901 到 2155。2 位格式所允许的值：70 到 69，表示从 1970 到 2069。</td>
+</tr>
+</tbody>
+</table>
+<p>*即便 DATETIME 和 TIMESTAMP 返回相同的格式，它们的工作方式很不同。在 INSERT 或 UPDATE 查询中，TIMESTAMP 自动把自身设置为当前的日期和时间。TIMESTAMP 也接受不同的格式，比如 YYYYMMDDHHMMSS、YYMMDDHHMMSS、YYYYMMDD 或 YYMMDD。</p>
+<hr />
+<h2 id="sql-server">SQL Server 数据类型</h2>
+<p><strong>String 类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>存储</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char(n)</td>
+<td>固定长度的字符串。最多 8,000 个字符。</td>
+<td>Defined width</td>
+</tr>
+<tr>
+<td>varchar(n)</td>
+<td>可变长度的字符串。最多 8,000 个字符。</td>
+<td>2 bytes + number of chars</td>
+</tr>
+<tr>
+<td>varchar(max)</td>
+<td>可变长度的字符串。最多 1,073,741,824 个字符。</td>
+<td>2 bytes + number of chars</td>
+</tr>
+<tr>
+<td>text</td>
+<td>可变长度的字符串。最多 2GB 文本数据。</td>
+<td>4 bytes + number of chars</td>
+</tr>
+<tr>
+<td>nchar</td>
+<td>固定长度的 Unicode 字符串。最多 4,000 个字符。</td>
+<td>Defined width x 2</td>
+</tr>
+<tr>
+<td>nvarchar</td>
+<td>可变长度的 Unicode 字符串。最多 4,000 个字符。</td>
+<td></td>
+</tr>
+<tr>
+<td>nvarchar(max)</td>
+<td>可变长度的 Unicode 字符串。最多 536,870,912 个字符。</td>
+<td></td>
+</tr>
+<tr>
+<td>ntext</td>
+<td>可变长度的 Unicode 字符串。最多 2GB 文本数据。</td>
+<td></td>
+</tr>
+<tr>
+<td>bit</td>
+<td>允许 0、1 或 NULL</td>
+<td></td>
+</tr>
+<tr>
+<td>binary(n)</td>
+<td>固定长度的二进制字符串。最多 8,000 字节。</td>
+<td></td>
+</tr>
+<tr>
+<td>varbinary</td>
+<td>可变长度的二进制字符串。最多 8,000 字节。</td>
+<td></td>
+</tr>
+<tr>
+<td>varbinary(max)</td>
+<td>可变长度的二进制字符串。最多 2GB。</td>
+<td></td>
+</tr>
+<tr>
+<td>image</td>
+<td>可变长度的二进制字符串。最多 2GB。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Number 类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>存储</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tinyint</td>
+<td>允许从 0 到 255 的所有数字。</td>
+<td>1 字节</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>允许介于 -32,768 与 32,767 的所有数字。</td>
+<td>2 字节</td>
+</tr>
+<tr>
+<td>int</td>
+<td>允许介于 -2,147,483,648 与 2,147,483,647 的所有数字。</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td>bigint</td>
+<td>允许介于 -9,223,372,036,854,775,808 与 9,223,372,036,854,775,807 之间的所有数字。</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td>decimal(p,s)</td>
+<td>固定精度和比例的数字。<br><br>允许从 -10^38 +1 到 10^38 -1 之间的数字。<br><br>p 参数指示可以存储的最大位数（小数点左侧和右侧）。p 必须是 1 到 38 之间的值。默认是 18。<br><br>s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。</td>
+<td>5-17 字节</td>
+</tr>
+<tr>
+<td>numeric(p,s)</td>
+<td>固定精度和比例的数字。<br><br>允许从 -10^38 +1 到 10^38 -1 之间的数字。<br><br>p 参数指示可以存储的最大位数（小数点左侧和右侧）。p 必须是 1 到 38 之间的值。默认是 18。<br><br>s 参数指示小数点右侧存储的最大位数。s 必须是 0 到 p 之间的值。默认是 0。</td>
+<td>5-17 字节</td>
+</tr>
+<tr>
+<td>smallmoney</td>
+<td>介于 -214,748.3648 与 214,748.3647 之间的货币数据。</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td>money</td>
+<td>介于 -922,337,203,685,477.5808 与 922,337,203,685,477.5807 之间的货币数据。</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td>float(n)</td>
+<td>从 -1.79E + 308 到 1.79E + 308 的浮动精度数字数据。<br><br>n 参数指示该字段保存 4 字节还是 8 字节。float(24) 保存 4 字节，而 float(53) 保存 8 字节。n 的默认值是 53。</td>
+<td>4 或 8 字节</td>
+</tr>
+<tr>
+<td>real</td>
+<td>从 -3.40E + 38 到 3.40E + 38 的浮动精度数字数据。</td>
+<td>4 字节</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Date 类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+<th>存储</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>datetime</td>
+<td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 3.33 毫秒。</td>
+<td>8 字节</td>
+</tr>
+<tr>
+<td>datetime2</td>
+<td>从 1753 年 1 月 1 日 到 9999 年 12 月 31 日，精度为 100 纳秒。</td>
+<td>6-8 字节</td>
+</tr>
+<tr>
+<td>smalldatetime</td>
+<td>从 1900 年 1 月 1 日 到 2079 年 6 月 6 日，精度为 1 分钟。</td>
+<td>4 字节</td>
+</tr>
+<tr>
+<td>date</td>
+<td>仅存储日期。从 0001 年 1 月 1 日 到 9999 年 12 月 31 日。</td>
+<td>3 bytes</td>
+</tr>
+<tr>
+<td>time</td>
+<td>仅存储时间。精度为 100 纳秒。</td>
+<td>3-5 字节</td>
+</tr>
+<tr>
+<td>datetimeoffset</td>
+<td>与 datetime2 相同，外加时区偏移。</td>
+<td>8-10 字节</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>存储唯一的数字，每当创建或修改某行时，该数字会更新。timestamp 值基于内部时钟，不对应真实时间。每个表只能有一个 timestamp 变量。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>其他数据类型：</strong></p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sql_variant</td>
+<td>存储最多 8,000 字节不同数据类型的数据，除了 text、ntext 以及 timestamp。</td>
+</tr>
+<tr>
+<td>uniqueidentifier</td>
+<td>存储全局唯一标识符 (GUID)。</td>
+</tr>
+<tr>
+<td>xml</td>
+<td>存储 XML 格式化数据。最多 2GB。</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>存储对用于数据库操作的指针的引用。</td>
+</tr>
+<tr>
+<td>table</td>
+<td>存储结果集，供稍后处理。</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2023 SEMHAQ
+    </div>
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "toc.integrate", "navigation.top", "navigation.indexes"], "search": "../../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.fc8c2696.min.js"></script>
+      
+    
+  </body>
+</html>
